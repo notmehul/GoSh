@@ -12,13 +12,13 @@ func execInput(input string) error {
 	// to remove the newline thingy
 	input = strings.TrimSuffix(input, "\n")
 
-	// prepare the command to execute
-	cmd := exec.Command(input)
+	// split the input
+	args := strings.Split(input, " ")
 
-	// set the correct output device
+	cmd := exec.Command(args[0], args[1:]...)
+
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
-
 	// execute the command and return the error
 	return cmd.Run()
 }
